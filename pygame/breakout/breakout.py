@@ -3,9 +3,9 @@ import pygame
 pygame.init()
 
 # criação da janela
-width = 893
-height = 1000
-size = (width, height)
+WIDTH = 893
+HEIGHT = 1000
+size = (WIDTH, HEIGHT)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Breakout Game")
 # controlar o tempo
@@ -30,21 +30,96 @@ paddle_height = 20
 # classe para armazenar objetos
 all_spites_list = pygame.sprite.Group()
 
+
+# tijolos
+class Brick(pygame.sprite.Sprite):
+
+    def __int__(self, color, width, height):
+        super().__init__()
+        self.image = pygame.Surface([width, height])
+        pygame.draw.rect(self.image, color, [0, 0, width, height])  # criacao do retangulo
+        self.rect = self.image.get_rect()
+
+
+all_bricks = pygame.sprite.Group()
+
 # criacao dos bricks (tijolos)
 brick_width = 55
-brick_height  16
+brick_height = 16
 x_gap = 7
 y_gap = 5
 wall_width = 16
 
-def main()
+
+# criacao dos tijolos
+def bricks():
+    for j in range(8):
+        for i in range(14):
+            if j < 2:
+                if i == 0:
+                    brick = Brick(RED, brick_width, brick_height)
+                    brick.rect.x = wall_width
+                    brick.rect.y = 215 + j * (y_gap + brick_height)
+                    all_sprites_list.add(brick)
+                    all_bricks.add(brick)
+                else:
+                    brick = Brick(RED, brick_width, brick_height)
+                    brick.rect.x = wall_width + brick_width + x_gap + (i - 1) * (brick_width + x_gap)
+                    brick.rect.y = 215 + j * (y_gap + brick_height)
+                    all_sprites_list.add(brick)
+                    all_bricks.add(brick)
+            if 1 < j < 4:
+                if i == 0:
+                    brick = Brick(ORANGE, brick_width, brick_height)
+                    brick.rect.x = wall_width
+                    brick.rect.y = 215 + j * (y_gap + brick_height)
+                    all_sprites_list.add(brick)
+                    all_bricks.add(brick)
+                else:
+                    brick = Brick(ORANGE, brick_width, brick_height)
+                    brick.rect.x = wall_width + brick_width + x_gap + (i - 1) * (brick_width + x_gap)
+                    brick.rect.y = 215 + j * (y_gap + brick_height)
+                    all_sprites_list.add(brick)
+                    all_bricks.add(brick)
+            if 3 < j < 6:
+                if i == 0:
+                    brick = Brick(GREEN, brick_width, brick_height)
+                    brick.rect.x = wall_width
+                    brick.rect.y = 215 + j * (y_gap + brick_height)
+                    all_sprites_list.add(brick)
+                    all_bricks.add(brick)
+                else:
+                    brick = Brick(GREEN, brick_width, brick_height)
+                    brick.rect.x = wall_width + brick_width + x_gap + (i - 1) * (brick_width + x_gap)
+                    brick.rect.y = 215 + j * (y_gap + brick_height)
+                    all_sprites_list.add(brick)
+                    all_bricks.add(brick)
+            if 5 < j < 8:
+                if i == 0:
+                    brick = Brick(YELLOW, brick_width, brick_height)
+                    brick.rect.x = wall_width
+                    brick.rect.y = 215 + j * (y_gap + brick_height)
+                    all_sprites_list.add(brick)
+                    all_bricks.add(brick)
+                else:
+                    brick = Brick(YELLOW, brick_width, brick_height)
+                    brick.rect.x = wall_width + brick_width + x_gap + (i - 1) * (brick_width + x_gap)
+                    brick.rect.y = 215 + j * (y_gap + brick_height)
+                    all_sprites_list.add(brick)
+                    all_bricks.add(brick)
+
+
+brick_wall = bricks()
+
+
+def main():
     clock.tick(fps_rate)
 
     run = True
     while run:
-        for event in pygame.event.get()
-            if event.type == pygame.QUIT
-                rub - False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
 
             all_spites_list.update()
 
@@ -86,6 +161,5 @@ def main()
             pygame.display.update()
 
         pygame.quit()
-
 
     main()
